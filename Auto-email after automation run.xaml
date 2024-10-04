@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1154,1836</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1153.3333333333333,1898.6666666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Auto_email_after_automation_run_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -94,10 +94,11 @@
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Auto_email_after_automation_run" sap:VirtualizedContainerService.HintSize="645,1771" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Auto_email_after_automation_run" sap:VirtualizedContainerService.HintSize="644.6666666666666,1834" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="MasterfileToday" />
-      <Variable x:TypeArguments="x:String" Name="DateToday" />
+      <Variable x:TypeArguments="x:String" Name="DateTodayYear" />
+      <Variable x:TypeArguments="x:String" Name="DateTodayMMdd" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -105,15 +106,23 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="583,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="582.6666666666666,162" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[DateToday]</OutArgument>
+              <OutArgument x:TypeArguments="x:String">[DateTodayYear]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
               <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MMddyyyy")]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[DateTodayMMdd]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MMdd")]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -121,29 +130,29 @@
               <OutArgument x:TypeArguments="x:String">[MasterfileToday]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[In_MasterFolder + DateToday + "\" + DateToday + ".xlsx"]</InArgument>
+              <InArgument x:TypeArguments="x:String">[In_MasterFolder + DateTodayYear + "\" + "RAW WA HP Masterfile_" + DateTodayMMdd + ".xlsx"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="583,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending post-automation email.&quot;]" />
-    <ui:SendMail Bcc="{x:Null}" ContinueOnError="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;&lt;font color='red'&gt;&lt;b&gt;Hello POCs,&lt;br/&gt;&quot; &amp;&#xA;&quot;Kindly wait at least an hour for the processed files to fully sync in the SharePoint folder before moving them to your network drive. Thank you!&lt;/b&gt;&lt;/font&gt;&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xA;&quot;&lt;/body&gt;&lt;/html&gt;&quot;]" Cc="[In_RecipientCC]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="[Environment.UserName + &quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="583,283" sap2010:WorkflowViewState.IdRef="SendMail_2" IgnoreCRL="False" IsBodyHtml="True" Name="[Environment.UserName]" Port="25" SecureConnection="None" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has been COMPLETED" To="[In_RecipientTo]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="582.6666666666666,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending post-automation email.&quot;]" />
+    <ui:SendMail AttachmentsCollection="{x:Null}" Bcc="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;&lt;font color='red'&gt;&lt;b&gt;Hello POCs,&lt;br/&gt;&quot; &amp;&#xA;&quot;Kindly wait at least an hour for the processed files to fully sync in the SharePoint folder before moving them to your network drive. Thank you!&lt;/b&gt;&lt;/font&gt;&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xA;&quot;&lt;/body&gt;&lt;/html&gt;&quot;]" Cc="[In_RecipientCC]" ContinueOnError="{x:Null}" DisplayName="Send SMTP Mail Message" Email="{x:Null}" EnableSSL="True" From="[Environment.UserName + &quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="582.6666666666666,302" sap2010:WorkflowViewState.IdRef="SendMail_2" IgnoreCRL="False" IsBodyHtml="True" MailMessage="{x:Null}" Name="[Environment.UserName]" Password="{x:Null}" Port="25" ReplyTo="{x:Null}" Result="{x:Null}" SecureConnection="None" SecurePassword="{x:Null}" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has been COMPLETED" TimeoutMS="{x:Null}" To="[In_RecipientTo]" UseOAuth="{x:Null}">
       <ui:SendMail.Files>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
           <InArgument x:TypeArguments="x:String">[MasterfileToday]</InArgument>
         </scg:List>
       </ui:SendMail.Files>
     </ui:SendMail>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="583,671" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="582.6666666666666,681.3333333333334" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="546,592" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="546,601.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <umab:OutlookApplicationCard Account="{x:Null}" AccountMismatchBehavior="UseDefaultEmailAccount" sap2010:Annotation.AnnotationText="Send an automated email with the attached updated Masterfile once the renaming process is completed by the bot." DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="484,481" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_1">
+          <umab:OutlookApplicationCard Account="{x:Null}" AccountMismatchBehavior="UseDefaultEmailAccount" sap2010:Annotation.AnnotationText="Send an automated email with the attached updated Masterfile once the renaming process is completed by the bot." DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="484,490.6666666666667" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_1">
             <umab:OutlookApplicationCard.Body>
               <ActivityAction x:TypeArguments="um:IMailQuickHandle">
                 <ActivityAction.Argument>
@@ -155,12 +164,10 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&quot; &amp;&#xD;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;&lt;font color='red'&gt;&lt;b&gt;Hello POCs,&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;Kindly wait at least an hour for the processed files to fully sync in the SharePoint folder before moving them to your network drive. Thank you!&lt;/b&gt;&lt;/font&gt;&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xD;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xD;&#xA;&quot;&lt;/body&gt;&lt;/html&gt;&quot;]" Cc="[In_RecipientCC]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="388,146" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="High" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="RPA for WAHP Matching Process has been COMPLETED" To="[In_RecipientTo]">
+                  <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;html&gt;&lt;body&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;&lt;font color='red'&gt;&lt;b&gt;Hello POCs,&lt;br/&gt;&quot; &amp;&#xA;&quot;Kindly wait at least an hour for the processed files to fully sync in the SharePoint folder before moving them to your network drive. Thank you!&lt;/b&gt;&lt;/font&gt;&quot; &amp; &quot;&lt;br/&gt;&lt;br/&gt;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&lt;br/&gt;&quot; &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xA;&quot;&lt;/body&gt;&lt;/html&gt;&quot;]" Cc="[In_RecipientCC]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="388,146" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="High" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="RPA for WAHP Matching Process has been COMPLETED" To="[In_RecipientTo]">
                     <ui:SendOutlookMail.Files>
                       <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                        <InArgument x:TypeArguments="x:String">
-                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="MasterfileToday" />
-                        </InArgument>
+                        <InArgument x:TypeArguments="x:String">[MasterfileToday]</InArgument>
                       </scg:List>
                     </ui:SendOutlookMail.Files>
                   </ui:SendOutlookMail>

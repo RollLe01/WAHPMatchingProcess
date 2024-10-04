@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1154,2236</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1153.3333333333333,1901.3333333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Move_files_to_the_DONE_folder_before_renaming_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -97,7 +97,7 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Move_files_to_the_DONE_folder_before_renaming" sap:VirtualizedContainerService.HintSize="548,2171" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Move_files_to_the_DONE_folder_before_renaming" sap:VirtualizedContainerService.HintSize="548,1836.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="DateToday" />
     </Sequence.Variables>
@@ -106,8 +106,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Moving files to the DONE folder before automation.&quot;]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="486,194" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Moving files to the DONE folder before automation.&quot;]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="486,192.66666666666666" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -131,7 +131,7 @@
               <OutArgument x:TypeArguments="x:String">[In_WAHPSubFolder]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[In_WAHPFolder &amp; "\RAW FL FILES"]</InArgument>
+              <InArgument x:TypeArguments="x:String">[In_WAHPFolder &amp; "\RAW WAHP FILES"]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
@@ -145,39 +145,39 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:FolderExistsX sap2010:Annotation.AnnotationText="Check if the Flobot folder is available in the SharePoint folder." DisplayName="Folder Exists" Exists="[In_WAHPFolderExists]" sap:VirtualizedContainerService.HintSize="486,175" sap2010:WorkflowViewState.IdRef="FolderExistsX_1" Path="[In_WAHPFolder]">
+    <ui:FolderExistsX sap2010:Annotation.AnnotationText="Check if the Flobot folder is available in the SharePoint folder." DisplayName="Folder Exists" Exists="[In_WAHPFolderExists]" sap:VirtualizedContainerService.HintSize="486,182" sap2010:WorkflowViewState.IdRef="FolderExistsX_1" Path="[In_WAHPFolder]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:FolderExistsX>
-    <If sap2010:Annotation.AnnotationText="If Flobot is available for processing, the bot will proceed in copying the file to the &quot;DONE&quot; folder; otherwise an auto-email will be sent to the process owners and the flow will be terminated." Condition="[In_WAHPFolderExists]" sap:VirtualizedContainerService.HintSize="486,1119" sap2010:WorkflowViewState.IdRef="If_1">
+    <If sap2010:Annotation.AnnotationText="If Flobot is available for processing, the bot will proceed in copying the file to the &quot;DONE&quot; folder; otherwise an auto-email will be sent to the process owners and the flow will be terminated." Condition="[In_WAHPFolderExists]" sap:VirtualizedContainerService.HintSize="486,770" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="452,516" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence sap:VirtualizedContainerService.HintSize="452,524" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="410,428" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Directory.GetFiles(In_WAHPSubFolder, &quot;*.pdf&quot;)]">
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="410,436.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Directory.GetFiles(In_WAHPSubFolder, &quot;*.pdf&quot;)]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="x:String">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:String" Name="file" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,242" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,246.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:CopyFile ContinueOnError="True" Destination="[In_DoneFolder]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="334,154" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[file]" />
+                  <ui:CopyFile ContinueOnError="True" Destination="[In_DoneFolder]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="334,159.33333333333334" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[file]" />
                 </Sequence>
               </ActivityAction>
             </ui:ForEach.Body>
@@ -205,7 +205,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully moved files to the DONE folder.&quot;]" />
-    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="486,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully moved files to the DONE folder.&quot;]" />
+    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="486,92" sap2010:WorkflowViewState.IdRef="Delay_1" />
   </Sequence>
 </Activity>

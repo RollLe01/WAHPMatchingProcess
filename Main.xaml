@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1154,1758" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1153.3333333333333,1780.6666666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -83,7 +83,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="450,1693" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="450,1716" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
       <Variable x:TypeArguments="x:String" Name="ProcessNameEdge" />
@@ -99,97 +99,62 @@
       <Variable x:TypeArguments="x:String" Name="RecipientCC" />
       <Variable x:TypeArguments="x:String" Name="RecipientTo" />
       <Variable x:TypeArguments="x:String" Name="SMTPServer" />
+      <Variable x:TypeArguments="x:String" Name="DateProcessed" />
+      <Variable x:TypeArguments="x:String" Name="OpValue" />
+      <Variable x:TypeArguments="x:String" Name="TranNumVal" />
+      <Variable x:TypeArguments="x:String" Name="RepNumVal" />
+      <Variable x:TypeArguments="x:String" Name="AutoStatus" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="InitAllSettings.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="InitAllSettings.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="InitAllSettings.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="InitAllSettings.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">
-          <Literal x:TypeArguments="x:String">WAHPConfigFile.xlsx</Literal>
-        </InArgument>
-        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">
-          <VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">WAHPConfigFile.xlsx</InArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Auto email notification once the automation starts.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Auto email notification once the automation starts.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Auto email notification once the automation starts.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Auto email notification once the automation starts.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_SMTPServer">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SMTPServer&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientTo&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientCC&quot;).ToString" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_SMTPServer">[Config("SMTPServer").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">[Config("RecipientTo").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">[Config("RecipientCC").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Close all active Excel and PDF applications.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Close all active Excel and PDF applications.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Close all active Excel and PDF applications.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Close all active Excel and PDF applications.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNamePDF">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ProcessNamePDF" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNameExcel">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ProcessNameExcel" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNameEdge">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ProcessNameEdge" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNamePDF">[ProcessNamePDF]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNameExcel">[ProcessNameExcel]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_ProcessNameEdge">[ProcessNameEdge]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Download Files from SharePoint.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Download Files from SharePoint.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Download Files from SharePoint.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Download Files from SharePoint.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_BaseURL">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;BaseURL&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixToday">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SuffixToday&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixDone">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SuffixToday&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_TempFiles">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;TempFiles&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_BaseURL">[Config("BaseURL").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixToday">[Config("SuffixToday").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixDone">[Config("SuffixToday").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_TempFiles">[Config("TempFiles").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Extract files from the zipped folder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Extract files from the zipped folder.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Extract files from the zipped folder.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Extract files from the zipped folder.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_ZippedDirectory">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;ZippedDirectory&quot;).ToString" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_ZippedDirectory">[Config("ZippedDirectory").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Move files to the DONE folder before renaming.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Move files to the DONE folder before renaming.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Move files to the DONE folder before renaming.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Move files to the DONE folder before renaming.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_DoneFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DoneFolder" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="WAHPFolder" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Boolean" x:Key="In_WAHPFolderExists">
-          <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="WAHPFolderExists" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPSubFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="WAHPSubFolder" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_DoneFolder">[DoneFolder]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPFolder">[WAHPFolder]</InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="In_WAHPFolderExists">[WAHPFolderExists]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPSubFolder">[WAHPSubFolder]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SharePoint access for file renaming.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SharePoint access for file renaming.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SharePoint access for file renaming.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="SharePoint access for file renaming.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Boolean" x:Key="In_MasterfileExists">
           <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="MasterFileExists" />
@@ -201,7 +166,7 @@
           <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DoneFolder" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="MasterFolder" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="In_WAHPSubFolder">
           <VisualBasicValue x:TypeArguments="x:String" ExpressionText="WAHPSubFolder" />
@@ -209,48 +174,34 @@
         <InArgument x:TypeArguments="x:String" x:Key="In_WAHPFolder">
           <VisualBasicValue x:TypeArguments="x:String" ExpressionText="WAHPFolder" />
         </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Delete PDF files that were not renamed.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Delete PDF files that were not renamed.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_DoneFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="DoneFolder" />
+        <InArgument x:TypeArguments="x:String" x:Key="In_RepNumVal">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="RepNumVal" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="WAHPFolder" />
+        <InArgument x:TypeArguments="x:String" x:Key="In_TranNumVal">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TranNumVal" />
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Upload files to the SharePoint site after automation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Upload files to the SharePoint site after automation.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Delete PDF files that were not renamed.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Delete PDF files that were not renamed.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_BaseURL">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;BaseURL&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixDone">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SuffixDone&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_DoneFolder">[DoneFolder]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_WAHPFolder">[WAHPFolder]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Auto-email after automation run.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Auto-email after automation run.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Upload files to the SharePoint site after automation.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Upload files to the SharePoint site after automation.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;MasterFolder&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientCC&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientTo&quot;).ToString" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="IN_SMTPServer">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SMTPServer&quot;).ToString" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_BaseURL">[Config("BaseURL").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_SuffixDone">[Config("SuffixDone").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Auto-email after automation run.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Auto-email after automation run.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="In_MasterFolder">[Config("MasterFolder").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">[Config("RecipientCC").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">[Config("RecipientTo").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="IN_SMTPServer">[Config("SMTPServer").ToString]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
@@ -263,15 +214,9 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="File Retention Workflow.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="File Retention Workflow.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientTo&quot;).ToString" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;RecipientCC&quot;).ToString" />
-              </InArgument>
-              <InArgument x:TypeArguments="x:String" x:Key="In_SMTPServer">
-                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Config(&quot;SMTPServer&quot;).ToString" />
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_RecipientTo">[Config("RecipientTo").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_RecipientCC">[Config("RecipientCC").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="In_SMTPServer">[Config("SMTPServer").ToString]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>

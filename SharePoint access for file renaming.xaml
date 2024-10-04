@@ -6,11 +6,13 @@
     <x:Property Name="In_MasterFolder" Type="InArgument(x:String)" />
     <x:Property Name="In_WAHPSubFolder" Type="InArgument(x:String)" />
     <x:Property Name="In_WAHPFolder" Type="InArgument(x:String)" />
+    <x:Property Name="In_RepNumVal" Type="InArgument(x:String)" />
+    <x:Property Name="In_TranNumVal" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1154,3759</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1153.3333333333333,5123.333333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SharePoint_access_for_file_renaming_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -107,11 +109,14 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SharePoint_access_for_file_renaming" sap:VirtualizedContainerService.HintSize="719,3694" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SharePoint_access_for_file_renaming" sap:VirtualizedContainerService.HintSize="806,5058.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="DateToday" />
+      <Variable x:TypeArguments="x:String" Name="DateTodayYear" />
       <Variable x:TypeArguments="x:String" Name="MasterfileToday" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -119,22 +124,33 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap:VirtualizedContainerService.HintSize="657,3266" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence sap:VirtualizedContainerService.HintSize="744,4631.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="DateTodayMMdd" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="595,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Starting the automatic renaming of files.&quot;]" />
-      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="595,225" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="682,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Starting the automatic renaming of files.&quot;]" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="682,254" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
               <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[DateToday]</OutArgument>
+                <OutArgument x:TypeArguments="x:String">[DateTodayYear]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
                 <InArgument x:TypeArguments="x:String">[Now.ToString("MMddyyyy")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[DateTodayMMdd]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[Now.ToString("MMdd")]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
@@ -142,7 +158,7 @@
                 <OutArgument x:TypeArguments="x:String">[In_WAHPFolder]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[In_MasterFolder &amp; DateToday]</InArgument>
+                <InArgument x:TypeArguments="x:String">[In_MasterFolder &amp; DateTodayYear]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
@@ -150,7 +166,7 @@
                 <OutArgument x:TypeArguments="x:String">[MasterfileToday]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[In_MasterFolder + DateToday + "\" + DateToday + ".xlsx"]</InArgument>
+                <InArgument x:TypeArguments="x:String">[In_MasterFolder + DateTodayYear + "\" + "RAW WA HP Masterfile_" + DateTodayMMdd + ".xlsx"]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
@@ -158,7 +174,7 @@
                 <OutArgument x:TypeArguments="x:String">[In_WAHPSubFolder]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[In_WAHPFolder &amp; "\RAW FL FILES"]</InArgument>
+                <InArgument x:TypeArguments="x:String">[In_WAHPFolder &amp; "\RAW WAHP FILES"]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
@@ -172,40 +188,41 @@
           </scg:List>
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
-      <ui:FileExistsX sap2010:Annotation.AnnotationText="Check if the Masterfile is available in the SharePoint folder." DisplayName="File Exists" Exists="[In_MasterfileExists]" sap:VirtualizedContainerService.HintSize="595,175" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[MasterfileToday]">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="682,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Masterfile: &quot; &amp; MasterfileToday]" />
+      <ui:FileExistsX sap2010:Annotation.AnnotationText="Check if the Masterfile is available in the SharePoint folder." DisplayName="File Exists" Exists="[In_MasterfileExists]" sap:VirtualizedContainerService.HintSize="682,182" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[MasterfileToday]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:FileExistsX>
-      <If sap2010:Annotation.AnnotationText="If Masterfile is available for processing, the bot will proceed; otherwise an auto-email will be sent to the process owners and the flow will be terminated." Condition="[In_MasterfileExists]" sap:VirtualizedContainerService.HintSize="594.6666666666666,2494" sap2010:WorkflowViewState.IdRef="If_1">
+      <If sap2010:Annotation.AnnotationText="If Masterfile is available for processing, the bot will proceed; otherwise an auto-email will be sent to the process owners and the flow will be terminated." Condition="[In_MasterfileExists]" sap:VirtualizedContainerService.HintSize="682,3635.3333333333335" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <Sequence sap:VirtualizedContainerService.HintSize="560.6666666666666,2264.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence sap:VirtualizedContainerService.HintSize="648,2737.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_7">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadRange AddHeaders="True" DataTable="[In_FileDT]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="518.6666666666666,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" PreserveFormat="True" SheetName="RAW" WorkbookPath="[MasterfileToday]">
+            <ui:ReadRange AddHeaders="True" DataTable="[In_FileDT]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="606,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" PreserveFormat="True" SheetName="RAW" WorkbookPath="[MasterfileToday]">
               <ui:ReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
                 </InArgument>
               </ui:ReadRange.Range>
             </ui:ReadRange>
-            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the column values of the &quot;Report Number&quot; and &quot;Transaction Number&quot; and save it in a datatable." DataTable="[In_FileDT]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="518.6666666666666,2049.3333333333335" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the column values of the &quot;Report Number&quot; and &quot;Transaction Number&quot; and save it in a datatable." DataTable="[In_FileDT]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="606,2522" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="484.6666666666667,1887.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="572,2374.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_2">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="ReportNumberValue" />
                       <Variable x:TypeArguments="x:String" Name="TransanctionNumberValue" />
@@ -219,9 +236,9 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the &quot;Report Number&quot; value from the datatable and later on use it as the basis (part of the old file name) for renaming PDF file to its new file name." ColumnName="Report Number" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="422.6666666666667,254.66666666666666" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the &quot;Report Number&quot; value from the datatable and later on use it as the basis (part of the old file name) for renaming PDF file to its new file name." ColumnName="Report Number" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="510,254.66666666666666" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
                       <ui:GetRowItem.Value>
-                        <OutArgument x:TypeArguments="x:String">[ReportNumberValue]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String">[In_RepNumVal]</OutArgument>
                       </ui:GetRowItem.Value>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -229,9 +246,9 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:GetRowItem>
-                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the &quot;Transaction Number&quot; value from the datatable and later on use it as the new PDF file name." ColumnName="Transaction Number" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="422.6666666666667,238" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" sap2010:Annotation.AnnotationText="Get the &quot;Transaction Number&quot; value from the datatable and later on use it as the new PDF file name." ColumnName="Transaction Number" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="510,238" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
                       <ui:GetRowItem.Value>
-                        <OutArgument x:TypeArguments="x:String">[TransanctionNumberValue]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String">[In_TranNumVal]</OutArgument>
                       </ui:GetRowItem.Value>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -239,7 +256,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:GetRowItem>
-                    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Assign variables which will be used in the renaming process.&#xA;&#xA;Assign the variable of the old file name that was moved to the done folder before renaming it to the specified transaction number value.&#xA;&#xA;Assign the variable of the new file name once renaming process is completed." DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="422.6666666666667,321.3333333333333" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Assign variables which will be used in the renaming process.&#xA;&#xA;Assign the variable of the old file name that was moved to the done folder before renaming it to the specified transaction number value.&#xA;&#xA;Assign the variable of the new file name once renaming process is completed." DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="510,321.3333333333333" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                       <ui:MultipleAssign.AssignOperations>
                         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
                           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -247,7 +264,7 @@
                               <OutArgument x:TypeArguments="x:String">[OldFileName]</OutArgument>
                             </ui:AssignOperation.To>
                             <ui:AssignOperation.Value>
-                              <InArgument x:TypeArguments="x:String">["CrashReport_" &amp; ReportNumberValue &amp; ".pdf"]</InArgument>
+                              <InArgument x:TypeArguments="x:String">[In_RepNumVal &amp; ".pdf"]</InArgument>
                             </ui:AssignOperation.Value>
                           </ui:AssignOperation>
                           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -255,7 +272,7 @@
                               <OutArgument x:TypeArguments="x:String">[NewFileName]</OutArgument>
                             </ui:AssignOperation.To>
                             <ui:AssignOperation.Value>
-                              <InArgument x:TypeArguments="x:String">[TransanctionNumberValue &amp; ".pdf"]</InArgument>
+                              <InArgument x:TypeArguments="x:String">[In_TranNumVal &amp; ".pdf"]</InArgument>
                             </ui:AssignOperation.Value>
                           </ui:AssignOperation>
                           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -282,7 +299,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:MultipleAssign>
-                    <If sap2010:Annotation.AnnotationText="Check if the PDF file is moved to the Done folder with its old file name, &quot;CrashReport_'ReportNumberValue'.pdf&quot;" Condition="[File.Exists(OldFilePath)]" sap:VirtualizedContainerService.HintSize="422.6666666666667,468.6666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+                    <If sap2010:Annotation.AnnotationText="Check if the PDF file is moved to the Done folder with its old file name, &quot;CrashReport_'ReportNumberValue'.pdf&quot;" Condition="[File.Exists(OldFilePath)]" sap:VirtualizedContainerService.HintSize="510,468.6666666666667" sap2010:WorkflowViewState.IdRef="If_2">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -311,11 +328,11 @@
                         </Sequence>
                       </If.Else>
                     </If>
-                    <If sap2010:Annotation.AnnotationText="Check the existence of the renamed PDF file, to the specified &quot;Transaction Number&quot; in the Masterfile." Condition="[File.Exists(NewFilePath)]" sap:VirtualizedContainerService.HintSize="422.6666666666667,132.66666666666666" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If sap2010:Annotation.AnnotationText="Check the existence of the renamed PDF file, to the specified &quot;Transaction Number&quot; in the Masterfile." Condition="[File.Exists(NewFilePath)]" sap:VirtualizedContainerService.HintSize="510,620" sap2010:WorkflowViewState.IdRef="If_3">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
@@ -359,7 +376,7 @@
                         </Sequence>
                       </If.Else>
                     </If>
-                    <ui:WriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Update the Masterfile with the corresponding &quot;Automation Status.&quot;" DataTable="[In_FileDT]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="422.6666666666667,161.33333333333334" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="RAW" StartingCell="[&quot;A2:A&quot; &amp; (In_FileDT.Rows.Count + 1)]" WorkbookPath="[MasterfileToday]">
+                    <ui:WriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Update the Masterfile with the corresponding &quot;Automation Status.&quot;" DataTable="[In_FileDT]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="510,161.33333333333334" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="RAW" StartingCell="[&quot;A2:A&quot; &amp; (In_FileDT.Rows.Count + 1)]" WorkbookPath="[MasterfileToday]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -410,7 +427,7 @@
         </If.Else>
       </If>
     </Sequence>
-    <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="656.6666666666666,92" sap2010:WorkflowViewState.IdRef="Delay_1" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="656.6666666666666,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully renamed files.&quot;]" />
+    <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="744,92" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="744,144.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully renamed files.&quot;]" />
   </Sequence>
 </Activity>
