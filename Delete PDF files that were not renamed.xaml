@@ -99,7 +99,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="File_Deletion_Workflow" sap:VirtualizedContainerService.HintSize="1194.6666666666667,1652" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="File_Deletion_Workflow" sap:VirtualizedContainerService.HintSize="1194.6666666666667,1592.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="RemovePDF" />
       <Variable x:TypeArguments="x:String" Name="DateTodayYear" />
@@ -110,8 +110,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deleting unrenamed files in the DONE folder.&quot;]" />
-    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Create a variable to identify PDF files that have been moved to the &quot;DONE&quot; folder without being renamed and need to be deleted from the folder." DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="486,286.6666666666667" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="518,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Deleting unrenamed files in the DONE folder.&quot;]" />
+    <ui:MultipleAssign sap2010:Annotation.AnnotationText="Create a variable to identify PDF files that have been moved to the &quot;DONE&quot; folder without being renamed and need to be deleted from the folder." DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="518,286.6666666666667" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -154,7 +154,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
-    <Assign sap2010:Annotation.AnnotationText="Create a variable to identify PDF files that have been moved to the &quot;DONE&quot; folder without being renamed and need to be deleted from the folder." sap:VirtualizedContainerService.HintSize="486,179.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap2010:Annotation.AnnotationText="Create a variable to identify PDF files that have been moved to the &quot;DONE&quot; folder without being renamed and need to be deleted from the folder." sap:VirtualizedContainerService.HintSize="518,179.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[RemovePDF]</OutArgument>
       </Assign.To>
@@ -167,31 +167,37 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="486,695.3333333333334" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[RemovePDF]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each item" sap:VirtualizedContainerService.HintSize="518,636" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[RemovePDF]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,495.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="484,488" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Path.GetFileNameWithoutExtension(item).Length &lt; 10]" sap:VirtualizedContainerService.HintSize="410,408" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Path.GetFileNameWithoutExtension(item).Length &lt; 10]" sap:VirtualizedContainerService.HintSize="450,428" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="376,224" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="334,136.66666666666666" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[item.ToString]" />
+                  <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="382,114.66666666666667" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[item.ToString]" />
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3" />
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
               </If.Else>
             </If>
           </Sequence>
@@ -205,7 +211,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully deleted unrenamed files in the DONE folder.&quot;]" />
-    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="486,114.66666666666667" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="518,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Successfully deleted unrenamed files in the DONE folder.&quot;]" />
+    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="518,114.66666666666667" sap2010:WorkflowViewState.IdRef="Delay_1" />
   </Sequence>
 </Activity>
