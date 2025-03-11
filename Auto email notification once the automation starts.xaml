@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Auto_email_notification_once_the_automation_starts" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Auto_email_notification_once_the_automation_starts" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="In_SMTPServer" Type="InArgument(x:String)" />
     <x:Property Name="In_RecipientTo" Type="InArgument(x:String)" />
@@ -46,6 +46,9 @@
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Enums</x:String>
       <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Mail.Activities.Enums</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -97,16 +100,24 @@
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Auto_email_notification_once_the_automation_starts" sap:VirtualizedContainerService.HintSize="1194.6666666666667,735.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Auto_email_notification_once_the_automation_starts" sap:VirtualizedContainerService.HintSize="1194.6666666666667,634" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="582,57.333333333333336" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending pre-automation email.&quot;]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,57.333333333333336" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending pre-automation email.&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -114,32 +125,74 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="582,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+    <ui:SendMail ResourceAttachmentList="{x:Null}" AttachmentInputMode="Existing" AttachmentsCollection="{x:Null}" Bcc="{x:Null}" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" ContinueOnError="{x:Null}" DisplayName="Send SMTP Mail Message" Email="{x:Null}" EnableSSL="True" From="[Environment.UserName +&quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="416,329.3333333333333" sap2010:WorkflowViewState.IdRef="SendMail_8" IgnoreCRL="False" IsBodyHtml="True" MailMessage="{x:Null}" Name="[Environment.UserName]" Password="{x:Null}" Port="25" ReplyTo="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecureConnection="None" SecurePassword="{x:Null}" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has STARTED" TimeoutMS="{x:Null}" To="[In_RecipientTo]" UseISConnection="True" UseOAuth="{x:Null}">
+      <ui:SendMail.AttachmentsBackup>
+        <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="umame:AttachmentInputMode, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </ui:SendMail.AttachmentsBackup>
+      <ui:SendMail.ConnectionDetailsBackupSlot>
+        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="IntegrationService">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </ui:SendMail.ConnectionDetailsBackupSlot>
+      <ui:SendMail.Files>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+      </ui:SendMail.Files>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:SendMail>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_4">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="484,606" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:SendMail Bcc="{x:Null}" ContinueOnError="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" AttachmentInputMode="Existing" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="[Environment.UserName +&quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="382,48" sap2010:WorkflowViewState.IdRef="SendMail_7" IgnoreCRL="False" IsBodyHtml="True" Name="[Environment.UserName]" Port="25" SecureConnection="None" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has STARTED" To="[In_RecipientTo]">
-            <ui:SendMail.AttachmentsBackup>
-              <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
-                <usau:BackupSlot.BackupValues>
-                  <scg:Dictionary x:TypeArguments="umame:AttachmentInputMode, scg:List(x:Object)" />
-                </usau:BackupSlot.BackupValues>
-              </usau:BackupSlot>
-            </ui:SendMail.AttachmentsBackup>
-            <ui:SendMail.Files>
-              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
-            </ui:SendMail.Files>
+          <umab:OutlookApplicationCard Account="{x:Null}" AccountMismatchBehavior="UseDefaultEmailAccount" sap2010:Annotation.AnnotationText="Use default Outlook application to send email once the flow started its run." DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="450,546" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_4">
+            <umab:OutlookApplicationCard.Body>
+              <ActivityAction x:TypeArguments="um:IMailQuickHandle">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Outlook" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="416,304.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="382,244.66666666666666" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="RPA for WAHP Matching Process has STARTED" To="[In_RecipientTo]" UseISConnection="True">
+                    <ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+                      <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="{x:Null}">
+                        <usau:BackupSlot.BackupValues>
+                          <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+                        </usau:BackupSlot.BackupValues>
+                      </usau:BackupSlot>
+                    </ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+                    <ui:SendOutlookMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                    </ui:SendOutlookMail.Files>
+                  </ui:SendOutlookMail>
+                </Sequence>
+              </ActivityAction>
+            </umab:OutlookApplicationCard.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-          </ui:SendMail>
+          </umab:OutlookApplicationCard>
         </Sequence>
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
@@ -149,34 +202,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <umab:OutlookApplicationCard Account="{x:Null}" AccountMismatchBehavior="UseDefaultEmailAccount" sap2010:Annotation.AnnotationText="Use default Outlook application to send email once the flow started its run." DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="582,456.6666666666667" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_4">
-      <umab:OutlookApplicationCard.Body>
-        <ActivityAction x:TypeArguments="um:IMailQuickHandle">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Outlook" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="422,206" sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="388,146" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="RPA for WAHP Matching Process has STARTED" To="[In_RecipientTo]">
-              <ui:SendOutlookMail.Files>
-                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
-              </ui:SendOutlookMail.Files>
-            </ui:SendOutlookMail>
-          </Sequence>
-        </ActivityAction>
-      </umab:OutlookApplicationCard.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </umab:OutlookApplicationCard>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="582,141" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Pre-automation email successfully sent.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Pre-automation email successfully sent.&quot;]" />
   </Sequence>
 </Activity>
