@@ -99,7 +99,7 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Auto_email_after_automation_run" sap:VirtualizedContainerService.HintSize="1194.6666666666667,1241.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Auto_email_after_automation_run" sap:VirtualizedContainerService.HintSize="1194.6666666666667,1194" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="MasterfileToday" />
       <Variable x:TypeArguments="x:String" Name="DateTodayYear" />
@@ -142,7 +142,7 @@
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Sending post-automation email.&quot;]" />
-    <ui:SendMail ResourceAttachmentList="{x:Null}" AttachmentInputMode="FilePaths" AttachmentsCollection="{x:Null}" Bcc="{x:Null}" Body="[&quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&quot; &amp;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;Hello POCs,&quot; &amp;&#xA;&quot;Kindly wait at least 30 minutes for the processed files to fully sync to the SharePoint folder before moving them to your network drive. Thank you!&quot; &amp; &quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xA;&quot;&quot;]" Cc="[In_RecipientCC]" ContinueOnError="{x:Null}" DisplayName="Send SMTP Mail Message" Email="{x:Null}" EnableSSL="True" From="[Environment.UserName + &quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="478.6666666666667,482.6666666666667" sap2010:WorkflowViewState.IdRef="SendMail_3" IgnoreCRL="False" IsBodyHtml="True" MailMessage="{x:Null}" Name="[Environment.UserName]" Password="{x:Null}" Port="25" ReplyTo="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecureConnection="None" SecurePassword="{x:Null}" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has been COMPLETED" TimeoutMS="{x:Null}" To="[In_RecipientTo]" UseISConnection="True" UseOAuth="{x:Null}">
+    <ui:SendMail Bcc="{x:Null}" ContinueOnError="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" AttachmentInputMode="FilePaths" Body="[&quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; &quot;&quot; &amp;&#xA;&quot;This is to notify you that the RPA bot completed its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; &quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;Hello POCs,&quot; &amp;&#xA;&quot;Kindly wait at least 30 minutes for the processed files to fully sync to the SharePoint folder before moving them to your network drive. Thank you!&quot; &amp; &quot;&quot; &amp;&#xA;&quot;=========================================================================================================================&quot; &amp; &quot;&quot; &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot; &amp;&#xA;&quot;&quot;]" Cc="[In_RecipientCC]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="[Environment.UserName + &quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="478.6666666666667,435.3333333333333" sap2010:WorkflowViewState.IdRef="SendMail_3" IgnoreCRL="False" IsBodyHtml="True" Name="[Environment.UserName]" Port="25" SecureConnection="None" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has been COMPLETED" To="[In_RecipientTo]" UseISConnection="False" UseOAuth="False">
       <ui:SendMail.AttachmentsBackup>
         <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="FilePaths">
           <usau:BackupSlot.BackupValues>
@@ -153,9 +153,11 @@
         </usau:BackupSlot>
       </ui:SendMail.AttachmentsBackup>
       <ui:SendMail.ConnectionDetailsBackupSlot>
-        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="IntegrationService">
+        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="LegacyConfiguration">
           <usau:BackupSlot.BackupValues>
-            <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+            <scg:List x:TypeArguments="x:Object" x:Key="IntegrationService" Capacity="1">
+              <x:Null />
+            </scg:List>
           </usau:BackupSlot.BackupValues>
         </usau:BackupSlot>
       </ui:SendMail.ConnectionDetailsBackupSlot>

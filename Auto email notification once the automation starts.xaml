@@ -110,7 +110,7 @@
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Auto_email_notification_once_the_automation_starts" sap:VirtualizedContainerService.HintSize="1194.6666666666667,634" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Auto_email_notification_once_the_automation_starts" sap:VirtualizedContainerService.HintSize="1194.6666666666667,686.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -125,7 +125,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:SendMail ResourceAttachmentList="{x:Null}" AttachmentInputMode="Existing" AttachmentsCollection="{x:Null}" Bcc="{x:Null}" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xD;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" ContinueOnError="{x:Null}" DisplayName="Send SMTP Mail Message" Email="{x:Null}" EnableSSL="True" From="[Environment.UserName +&quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="416,329.3333333333333" sap2010:WorkflowViewState.IdRef="SendMail_8" IgnoreCRL="False" IsBodyHtml="True" MailMessage="{x:Null}" Name="[Environment.UserName]" Password="{x:Null}" Port="25" ReplyTo="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecureConnection="None" SecurePassword="{x:Null}" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has STARTED" TimeoutMS="{x:Null}" To="[In_RecipientTo]" UseISConnection="True" UseOAuth="{x:Null}">
+    <ui:SendMail Bcc="{x:Null}" ContinueOnError="{x:Null}" Email="{x:Null}" MailMessage="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" TimeoutMS="{x:Null}" AttachmentInputMode="Existing" Body="[&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;This message has been auto-generated. Please do not reply as this email address is not monitored.&quot; &amp; vbCrLf &amp;&#xA;&quot;This is to notify you that the RPA bot started its run at &quot; &amp; Now.ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) &amp; &quot;.&quot; &amp; vbCrLf &amp;&#xA;&quot;==========================================================================&quot; &amp; vbCrLf &amp;&#xA;&quot;Please send any support-related email to lester.rollan@lexisnexisrisk.com.&quot;]" Cc="[In_RecipientCC]" DisplayName="Send SMTP Mail Message" EnableSSL="True" From="[Environment.UserName +&quot;@lexisnexisrisk.com&quot;]" sap:VirtualizedContainerService.HintSize="416,382" sap2010:WorkflowViewState.IdRef="SendMail_8" IgnoreCRL="False" IsBodyHtml="True" Name="[Environment.UserName]" Port="25" SecureConnection="None" Server="[In_SMTPServer]" Subject="RPA for WAHP Matching Process has STARTED" To="[In_RecipientTo]" UseISConnection="False" UseOAuth="False">
       <ui:SendMail.AttachmentsBackup>
         <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
           <usau:BackupSlot.BackupValues>
@@ -134,9 +134,11 @@
         </usau:BackupSlot>
       </ui:SendMail.AttachmentsBackup>
       <ui:SendMail.ConnectionDetailsBackupSlot>
-        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="IntegrationService">
+        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="LegacyConfiguration">
           <usau:BackupSlot.BackupValues>
-            <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+            <scg:List x:TypeArguments="x:Object" x:Key="IntegrationService" Capacity="1">
+              <x:Null />
+            </scg:List>
           </usau:BackupSlot.BackupValues>
         </usau:BackupSlot>
       </ui:SendMail.ConnectionDetailsBackupSlot>
